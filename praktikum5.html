@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Starter Canva HTML App</title>
+	<style type="text/css">
+		canvas {
+			background-color: #ccc;
+		}
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	var ball;
+	function startMyApp() {
+		myApp.start();
+		ball = new Sprite(100, 300, 10, 'green');
+	}
+
+	var myApp = {
+		canvas : document.createElement('canvas'),
+		start : function(){
+			this.canvas.width = 800;
+			this.canvas.height = 450;
+			this.context = this.canvas.getContext('2d');
+			document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+			appControl();
+			this.Interval = setInterval (appLoop, 20);
+		},
+		clear : function() {
+			this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+		}
+	}
+
+	function appLoop(){
+		myApp.clear();
+		ball.x+=1;
+		ball.update();
+
+	}
+
+	function Sprite (x, y, radius, color) {
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+		this.color = color;
+		this.speed = 20;
+		var ctx = myApp.context;
+		this.update = function() {
+			ctx.beginPath();
+			ctx.arc(this.x, this.y, this.radius, 0,2*Math.PI);
+			ctx.fillStyle = this.color;
+			ctx.fill();
+		}
+	}
+	function appControl() {
+		document.body.addEventListener('mousedown', function(e){
+
+		})
+	}
+	startMyApp();
+
+</script>
+
+
+</body>
+</html>
